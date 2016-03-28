@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">App Github</string>
+
+    <!--Global Texts-->
+    <string name="global_text_default">- - -</string>
+
+</resources>
