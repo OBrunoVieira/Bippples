@@ -5,9 +5,16 @@
 
     <include layout="@layout/view_toolbar" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/activity_main_recyclerview"
+    <com.example.brunovieira.bippples.common.custom.CustomSwipeRefresh
+        android:id="@+id/activity_home_swipe_refresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:clickable="true">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/activity_home_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.example.brunovieira.bippples.common.custom.CustomSwipeRefresh>
 
 </android.support.v7.widget.LinearLayoutCompat>
