@@ -41,9 +41,6 @@ apt {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-
     def dependencies = rootProject.ext.dependencies
     apt dependencies.androidAnnotationsApt
     apt dependencies.loganSquareApt
@@ -58,4 +55,7 @@ dependencies {
     compile dependencies.eventBus
     compile dependencies.okHttpLogging
     compile dependencies.glide
+    compile(dependencies.materialDialog) {
+        transitive = true;
+    }
 }
