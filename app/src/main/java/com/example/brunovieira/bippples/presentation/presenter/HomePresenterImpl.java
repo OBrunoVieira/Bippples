@@ -8,6 +8,7 @@ import com.example.brunovieira.bippples.model.entities.ShotsVO;
 import com.example.brunovieira.bippples.model.event.Http4xxEvent;
 import com.example.brunovieira.bippples.model.event.Http5xxEvent;
 import com.example.brunovieira.bippples.model.event.NetworkErrorEvent;
+import com.example.brunovieira.bippples.model.event.ShotsResultEvent;
 import com.example.brunovieira.bippples.model.event.UnexpectedErrorEvent;
 import com.example.brunovieira.bippples.presentation.presenter.interfaces.HomePresenter;
 import com.example.brunovieira.bippples.presentation.view.activity.interfaces.HomeView;
@@ -36,6 +37,7 @@ public class HomePresenterImpl implements HomePresenter, RequestErrorResult {
     @Override
     public void attachView(HomeView homeView) {
         this.homeView = homeView;
+        this.homeView.setupSwipeRefreshListener();
     }
 
     @Override
@@ -46,9 +48,11 @@ public class HomePresenterImpl implements HomePresenter, RequestErrorResult {
 
     @Override
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onShotsListResult(List<ShotsVO> shotList) {
+    public void onShotsResult(ShotsResultEvent shotsResultEvent) {
         busProvider.getServiceBus().unregister(this);
-        homeView.showRecyclerView(homeView.createShotAdapter(shotList));
+        homeView.hideSwipeRefresh();
+        homeView.showJokeDialog(shotsResultEvent.getJokeVO().getJokeValueVO().getJokeDescription());
+        homeView.showRecyclerView(homeView.createShotAdapter(shotsResultEvent.getShotsList()));
     }
 
     @Override

@@ -5,12 +5,15 @@ import com.example.brunovieira.bippples.common.bus.BusProviderImpl;
 import com.example.brunovieira.bippples.common.bus.interfaces.BusProvider;
 import com.example.brunovieira.bippples.common.custom.RequestErrorResult;
 import com.example.brunovieira.bippples.domain.interfaces.HomeService;
-import com.example.brunovieira.bippples.model.entities.ShotsVO;
+import com.example.brunovieira.bippples.model.entities.JokeVO;
 import com.example.brunovieira.bippples.model.event.Http4xxEvent;
 import com.example.brunovieira.bippples.model.event.Http5xxEvent;
 import com.example.brunovieira.bippples.model.event.NetworkErrorEvent;
+import com.example.brunovieira.bippples.model.event.ShotsResultEvent;
 import com.example.brunovieira.bippples.model.event.UnexpectedErrorEvent;
+import com.example.brunovieira.bippples.model.http.JokeRepositoryHttpImpl;
 import com.example.brunovieira.bippples.model.http.ShotsRepositoryHttpImpl;
+import com.example.brunovieira.bippples.model.http.interfaces.JokeRepositoryHttp;
 import com.example.brunovieira.bippples.model.http.interfaces.ShotsRepositoryHttp;
 
 import org.androidannotations.annotations.Background;
@@ -18,8 +21,6 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
-import java.util.List;
 
 /**
  * Created by bruno.vieira on 28/03/2016.
@@ -30,6 +31,9 @@ public class HomeServiceImpl implements HomeService, RequestErrorResult {
     @Bean(ShotsRepositoryHttpImpl.class)
     ShotsRepositoryHttp shotsRepositoryHttp;
 
+    @Bean(JokeRepositoryHttpImpl.class)
+    JokeRepositoryHttp jokeRepositoryHttp;
+
     @Bean(BusProviderImpl.class)
     BusProvider busProvider;
 
@@ -37,14 +41,20 @@ public class HomeServiceImpl implements HomeService, RequestErrorResult {
     @Background
     public void getShotsList() {
         busProvider.getRepositoryBus().register(this);
-        shotsRepositoryHttp.getShotsList(Environment.ACCESS_TOKEN);
+        jokeRepositoryHttp.getAJoke(Environment.RANDOM_JOKE_URL);
     }
 
     @Override
     @Subscribe(threadMode = ThreadMode.BACKGROUND)
-    public void onListShotResult(List<ShotsVO> listShots) {
+    public void onJokeResult(JokeVO jokeVO){
+        shotsRepositoryHttp.getShotsList(Environment.ACCESS_TOKEN, jokeVO);
+    }
+
+    @Override
+    @Subscribe(threadMode = ThreadMode.BACKGROUND)
+    public void onShotsResult(ShotsResultEvent shotsResultEvent) {
         busProvider.getRepositoryBus().unregister(this);
-        busProvider.getServiceBus().post(listShots);
+        busProvider.getServiceBus().post(shotsResultEvent);
     }
 
     @Override

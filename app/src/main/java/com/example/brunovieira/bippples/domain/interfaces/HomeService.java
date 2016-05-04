@@ -1,6 +1,8 @@
 package com.example.brunovieira.bippples.domain.interfaces;
 
+import com.example.brunovieira.bippples.model.entities.JokeVO;
 import com.example.brunovieira.bippples.model.entities.ShotsVO;
+import com.example.brunovieira.bippples.model.event.ShotsResultEvent;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -13,5 +15,8 @@ public interface HomeService {
     void getShotsList();
 
     @Subscribe
-    void onListShotResult(List<ShotsVO> listShots);
+    void onJokeResult(JokeVO jokeVO);
+
+    @Subscribe
+    void onShotsResult(ShotsResultEvent shotsResultEvent);
 }

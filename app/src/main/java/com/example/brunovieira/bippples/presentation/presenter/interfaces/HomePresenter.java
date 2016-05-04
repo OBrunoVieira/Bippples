@@ -1,6 +1,7 @@
 package com.example.brunovieira.bippples.presentation.presenter.interfaces;
 
 import com.example.brunovieira.bippples.model.entities.ShotsVO;
+import com.example.brunovieira.bippples.model.event.ShotsResultEvent;
 import com.example.brunovieira.bippples.presentation.view.activity.interfaces.HomeView;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -16,5 +17,5 @@ public interface HomePresenter {
     void getShotsList();
 
     @Subscribe
-    void onShotsListResult(List<ShotsVO> shotList);
+    void onShotsResult(ShotsResultEvent shotsResultEvent);
 }
