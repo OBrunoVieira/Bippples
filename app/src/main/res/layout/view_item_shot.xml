@@ -2,7 +2,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimary"
+    android:layout_marginBottom="@dimen/spacing_sixteen"
+    android:layout_marginLeft="@dimen/spacing_sixteen"
+    android:layout_marginRight="@dimen/spacing_sixteen"
     app:cardCornerRadius="@dimen/spacing_six"
     app:cardPreventCornerOverlap="false"
     app:cardUseCompatPadding="true">
@@ -10,11 +12,15 @@
     <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
         android:orientation="vertical">
 
         <android.support.v7.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:id="@+id/view_item_shot_background_imageview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/placeholder_background" />
 
         <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
@@ -22,29 +28,29 @@
             android:background="@color/pinkLight"
             android:gravity="end"
             android:orientation="horizontal"
-            android:weightSum="1">
+            android:padding="@dimen/spacing_two">
 
             <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/view_item_shot_viewers_textview"
                 style="@style/ShotInformation"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.2"
                 android:drawableLeft="@drawable/ic_eye"
                 android:drawableStart="@drawable/ic_eye" />
 
             <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/view_item_shot_lovers_textview"
                 style="@style/ShotInformation"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.2"
                 android:drawableLeft="@drawable/ic_favorite"
                 android:drawableStart="@drawable/ic_favorite" />
 
             <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/view_item_shot_comments_textview"
                 style="@style/ShotInformation"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.2"
                 android:drawableLeft="@drawable/ic_comment"
                 android:drawableStart="@drawable/ic_comment" />
         </android.support.v7.widget.LinearLayoutCompat>

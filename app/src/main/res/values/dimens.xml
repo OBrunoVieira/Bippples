@@ -7,7 +7,12 @@
 
 
     <!--SPACING SIZE-->
+    <dimen name="spacing_two">2dp</dimen>
+    <dimen name="spacing_four">4dp</dimen>
     <dimen name="spacing_six">6dp</dimen>
     <dimen name="spacing_ten">10dp</dimen>
+    <dimen name="spacing_sixteen">16dp</dimen>
     <dimen name="spacing_twelve">20dp</dimen>
+
+    <dimen name="size_two_hundred">200dp</dimen>
 </resources>
