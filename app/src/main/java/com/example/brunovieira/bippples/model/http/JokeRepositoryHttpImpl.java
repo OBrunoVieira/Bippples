@@ -1,5 +1,7 @@
 package com.example.brunovieira.bippples.model.http;
 
+import com.example.brunovieira.bippples.Bippples_;
+import com.example.brunovieira.bippples.R;
 import com.example.brunovieira.bippples.common.bus.BusProviderImpl;
 import com.example.brunovieira.bippples.common.bus.interfaces.BusProvider;
 import com.example.brunovieira.bippples.common.custom.HandleCallback;
@@ -43,22 +45,22 @@ public class JokeRepositoryHttpImpl implements JokeRepositoryHttp {
 
             @Override
             protected void onClientError(Call<JokeVO> call, Response<JokeVO> response) {
-                busProvider.getRepositoryBus().post(new Http4xxEvent());
+                busProvider.getRepositoryBus().post(new Http4xxEvent(String.valueOf(response.code())));
             }
 
             @Override
             protected void onServerError(Call<JokeVO> call, Response<JokeVO> response) {
-                busProvider.getRepositoryBus().post(new Http5xxEvent());
+                busProvider.getRepositoryBus().post(new Http5xxEvent(String.valueOf(response.code())));
             }
 
             @Override
             protected void networkError() {
-                busProvider.getRepositoryBus().post(new NetworkErrorEvent());
+                busProvider.getRepositoryBus().post(new NetworkErrorEvent(Bippples_.getInstance().getString(R.string.network_error_description)));
             }
 
             @Override
             protected void unexpectedError() {
-                busProvider.getRepositoryBus().post(new UnexpectedErrorEvent());
+                busProvider.getRepositoryBus().post(new UnexpectedErrorEvent(Bippples_.getInstance().getString(R.string.unexpected_error_description)));
             }
         });
     }

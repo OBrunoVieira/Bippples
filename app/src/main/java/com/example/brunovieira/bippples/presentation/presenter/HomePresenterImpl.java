@@ -59,23 +59,31 @@ public class HomePresenterImpl implements HomePresenter, RequestErrorResult {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onClientError(Http4xxEvent http4xxEvent) {
         busProvider.getServiceBus().unregister(this);
+        homeView.hideSwipeRefresh();
+        homeView.showSnackBarError(http4xxEvent.getErrorDescription());
     }
 
     @Override
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onServerError(Http5xxEvent http5xxEvent) {
         busProvider.getServiceBus().unregister(this);
+        homeView.hideSwipeRefresh();
+        homeView.showSnackBarError(http5xxEvent.getErrorDescription());
     }
 
     @Override
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void networkError(NetworkErrorEvent networkErrorEvent) {
         busProvider.getServiceBus().unregister(this);
+        homeView.hideSwipeRefresh();
+        homeView.showSnackBarError(networkErrorEvent.getErrorDescription());
     }
 
     @Override
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void unexpectedError(UnexpectedErrorEvent unexpectedErrorEvent) {
         busProvider.getServiceBus().unregister(this);
+        homeView.hideSwipeRefresh();
+        homeView.showSnackBarError(unexpectedErrorEvent.getErrorDescription());
     }
 }

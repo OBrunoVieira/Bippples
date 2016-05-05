@@ -46,7 +46,7 @@ public class HomeServiceImpl implements HomeService, RequestErrorResult {
 
     @Override
     @Subscribe(threadMode = ThreadMode.BACKGROUND)
-    public void onJokeResult(JokeVO jokeVO){
+    public void onJokeResult(JokeVO jokeVO) {
         shotsRepositoryHttp.getShotsList(Environment.ACCESS_TOKEN, jokeVO);
     }
 
@@ -61,23 +61,27 @@ public class HomeServiceImpl implements HomeService, RequestErrorResult {
     @Subscribe(threadMode = ThreadMode.BACKGROUND)
     public void onClientError(Http4xxEvent http4xxEvent) {
         busProvider.getRepositoryBus().unregister(this);
+        busProvider.getServiceBus().post(http4xxEvent);
     }
 
     @Override
     @Subscribe(threadMode = ThreadMode.BACKGROUND)
     public void onServerError(Http5xxEvent http5xxEvent) {
         busProvider.getRepositoryBus().unregister(this);
+        busProvider.getServiceBus().post(http5xxEvent);
     }
 
     @Override
     @Subscribe(threadMode = ThreadMode.BACKGROUND)
     public void networkError(NetworkErrorEvent networkErrorEvent) {
         busProvider.getRepositoryBus().unregister(this);
+        busProvider.getServiceBus().post(networkErrorEvent);
     }
 
     @Override
     @Subscribe(threadMode = ThreadMode.BACKGROUND)
     public void unexpectedError(UnexpectedErrorEvent unexpectedErrorEvent) {
         busProvider.getRepositoryBus().unregister(this);
+        busProvider.getServiceBus().post(unexpectedErrorEvent);
     }
 }

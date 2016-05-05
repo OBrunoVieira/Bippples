@@ -18,4 +18,6 @@ public interface HomeView {
     ShotsAdapter createShotAdapter(List<ShotsVO> listShots);
 
     void showJokeDialog(String jokeDescription);
+
+    void showSnackBarError(String errorDescription);
 }

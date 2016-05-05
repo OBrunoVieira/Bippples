@@ -1,5 +1,9 @@
 package com.example.brunovieira.bippples.presentation.view.activity;
 
+import android.graphics.Color;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -7,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.view.View;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
@@ -35,6 +40,9 @@ public class HomeActivity extends AppCompatActivity implements HomeView, SwipeRe
 
     @ViewById(R.id.activity_home_swipe_refresh)
     CustomSwipeRefresh swipeRefresh;
+
+    @ViewById(R.id.activity_home_coordinator)
+    CoordinatorLayout coordinatorLayout;
 
     @Bean(HomePresenterImpl.class)
     HomePresenter homePresenter;
@@ -80,6 +88,20 @@ public class HomeActivity extends AppCompatActivity implements HomeView, SwipeRe
                 .content(Html.fromHtml(jokeDescription))
                 .theme(Theme.LIGHT)
                 .show();
+    }
+
+    @Override
+    public void showSnackBarError(String errorDescription) {
+        Snackbar snackbar = Snackbar
+                .make(coordinatorLayout, errorDescription, Snackbar.LENGTH_SHORT)
+                .setAction(getApplicationContext().getString(R.string.retry_text), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        homePresenter.getShotsList();
+                    }
+                });
+        snackbar.setActionTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent));
+        snackbar.show();
     }
 
     @Override

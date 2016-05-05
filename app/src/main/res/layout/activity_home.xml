@@ -1,20 +1,27 @@
-<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_home_coordinator"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <include layout="@layout/view_toolbar" />
-
-    <com.example.brunovieira.bippples.common.custom.CustomSwipeRefresh
-        android:id="@+id/activity_home_swipe_refresh"
+    <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/activity_home_recyclerview"
+        <include layout="@layout/view_toolbar" />
+
+        <com.example.brunovieira.bippples.common.custom.CustomSwipeRefresh
+            android:id="@+id/activity_home_swipe_refresh"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.example.brunovieira.bippples.common.custom.CustomSwipeRefresh>
+            android:layout_height="wrap_content"
+            android:clickable="true">
 
-</android.support.v7.widget.LinearLayoutCompat>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/activity_home_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.example.brunovieira.bippples.common.custom.CustomSwipeRefresh>
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+</android.support.design.widget.CoordinatorLayout>
