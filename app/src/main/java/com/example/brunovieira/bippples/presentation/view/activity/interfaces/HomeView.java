@@ -9,6 +9,8 @@ import java.util.List;
  * Created by bruno.vieira on 28/03/2016.
  */
 public interface HomeView {
+    ShotsAdapter createInitialShotsAdapter();
+
     void hideSwipeRefresh();
 
     void setupSwipeRefreshListener();

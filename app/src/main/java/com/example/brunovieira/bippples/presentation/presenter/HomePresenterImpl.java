@@ -4,7 +4,6 @@ import com.example.brunovieira.bippples.common.bus.BusProviderImpl;
 import com.example.brunovieira.bippples.common.custom.RequestErrorResult;
 import com.example.brunovieira.bippples.domain.HomeServiceImpl;
 import com.example.brunovieira.bippples.domain.interfaces.HomeService;
-import com.example.brunovieira.bippples.model.entities.ShotsVO;
 import com.example.brunovieira.bippples.model.event.Http4xxEvent;
 import com.example.brunovieira.bippples.model.event.Http5xxEvent;
 import com.example.brunovieira.bippples.model.event.NetworkErrorEvent;
@@ -17,8 +16,6 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
-import java.util.List;
 
 /**
  * Created by bruno.vieira on 28/03/2016.
@@ -38,6 +35,7 @@ public class HomePresenterImpl implements HomePresenter, RequestErrorResult {
     public void attachView(HomeView homeView) {
         this.homeView = homeView;
         this.homeView.setupSwipeRefreshListener();
+        this.homeView.showRecyclerView(this.homeView.createInitialShotsAdapter());
     }
 
     @Override

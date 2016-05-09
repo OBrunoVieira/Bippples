@@ -1,5 +1,6 @@
 package com.example.brunovieira.bippples.model.webservices;
 
+import com.example.brunovieira.bipples.Environment;
 import com.example.brunovieira.bippples.model.webservices.interfaces.WebServiceInterceptor;
 
 import org.androidannotations.annotations.EBean;
@@ -22,7 +23,7 @@ public class WebServiceInterceptorImpl implements WebServiceInterceptor, Interce
     @Override
     public OkHttpClient clientInterceptor() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        interceptor.setLevel(Environment.LOG_LEVEL);
 
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(this);

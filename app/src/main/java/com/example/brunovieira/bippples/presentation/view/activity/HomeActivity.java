@@ -1,6 +1,5 @@
 package com.example.brunovieira.bippples.presentation.view.activity;
 
-import android.graphics.Color;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -28,6 +27,7 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
+import java.util.Arrays;
 import java.util.List;
 
 @EActivity(R.layout.activity_home)
@@ -55,6 +55,13 @@ public class HomeActivity extends AppCompatActivity implements HomeView, SwipeRe
         setSupportActionBar(toolbar);
         homePresenter.attachView(this);
         homePresenter.getShotsList();
+    }
+
+    @Override
+    public ShotsAdapter createInitialShotsAdapter() {
+        List<ShotsVO> shotsList = Arrays.asList(new ShotsVO(),  new ShotsVO(), new ShotsVO(), new ShotsVO(), new ShotsVO());
+        shotsAdapter.setItems(shotsList);
+        return shotsAdapter;
     }
 
     @Override
